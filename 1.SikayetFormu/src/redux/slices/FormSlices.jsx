@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    complaints: []
+    complaints: [],
+    ministries: ["Adalet Bakanlığı",
+        "Sağlık Bakanlığı",
+        "Turizm Bakanlığı"
+    ]
 }
 
 export const FormSlice = createSlice({

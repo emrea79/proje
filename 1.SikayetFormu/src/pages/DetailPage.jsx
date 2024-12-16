@@ -10,14 +10,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
+import MinistryCategory from '../components/MinistryCategory';
+
 
 
 function DetailPage() {
 
 
     const dispatch = useDispatch();
-
     const { complaints } = useSelector((state) => state.form);
+
 
     const getAllComplaint = async () => {
         try {
@@ -42,6 +44,7 @@ function DetailPage() {
     return (
         <div className='list-div'>
             <Container maxWidth="xl">
+                <MinistryCategory />
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead >
                         <TableRow>

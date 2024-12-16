@@ -10,12 +10,15 @@ import dbService from '../services/DbService';
 import { toast } from 'react-toastify';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
+import { useSelector } from 'react-redux';
 
 
 
 function HomePage() {
 
     const navigate = useNavigate();
+
+    const { ministries } = useSelector((state) => state.form);
 
     // const [ministry, setMinistry] = useState("");
 
@@ -92,10 +95,14 @@ function HomePage() {
                                 label="bakanlık"
                                 onChange={handleChange}
                             >
-
-                                <MenuItem value={"Adalet Bakanlığı"}>Adalet Bakanlığı</MenuItem>
+                                {
+                                    ministries && ministries.map((manistry, index) => (
+                                        <MenuItem key={index} value={manistry}>{manistry}</MenuItem>
+                                    ))
+                                }
+                                {/* <MenuItem value={"Adalet Bakanlığı"}>Adalet Bakanlığı</MenuItem>
                                 <MenuItem value={"Sağlık Bakanlığı"}>Sağlık Bakanlığı</MenuItem>
-                                <MenuItem value={"Turizm Bakanlığı"}>Turizm Bakanlığı</MenuItem>
+                                <MenuItem value={"Turizm Bakanlığı"}>Turizm Bakanlığı</MenuItem> */}
                             </Select>
                             <FormHelperText>{errors.ministry && <span style={{ color: 'red' }} >{errors.ministry}</span>}</FormHelperText>
                         </FormControl>
