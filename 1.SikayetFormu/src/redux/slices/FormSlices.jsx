@@ -11,6 +11,10 @@ export const FormSlice = createSlice({
         setComplaints: (state, action) => {
             state.complaints = action.payload;
         },
+        removeComplaint: (state, action) => {
+            state.complaints = [...state.complaints.filter((complaint) => complaint.id !== action.payload)]
+
+        }
     },
 })
 

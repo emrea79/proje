@@ -7,6 +7,7 @@ body {
     width: 100%;
     height: 80px;
     background-color: #cfc597;
+
 }
 
 .title {
@@ -47,4 +48,19 @@ body {
 
 .list-div {
     margin-top: 20px;
+}
+
+.header-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.header1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }

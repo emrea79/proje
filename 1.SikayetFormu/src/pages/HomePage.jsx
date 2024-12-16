@@ -58,7 +58,7 @@ function HomePage() {
                     <div className='form-div'>
                         <TextField
                             sx={{ marginBottom: '10px' }}
-                            label="name"
+                            label="isim"
                             id="name"
                             size="small"
                             value={values.name}
@@ -69,7 +69,7 @@ function HomePage() {
                         />
                         <TextField
                             sx={{ marginBottom: '10px' }}
-                            label="surname"
+                            label="soyisim"
                             id="surname"
                             size="small"
                             value={values.surname}
@@ -80,7 +80,7 @@ function HomePage() {
                         />
                         <TextField
                             sx={{ marginBottom: '10px', height: '40px' }}
-                            label="complaint"
+                            label="şikayet"
                             id="complaint"
                             size="medium"
                             value={values.complaint}
@@ -89,7 +89,7 @@ function HomePage() {
                             variant='outlined'
                             helperText={errors.complaint && <span style={{ color: 'red' }} >{errors.complaint}</span>}
                         />
-                        <div style={{ marginTop: '20px' }}>
+                        <div style={{ marginTop: '30px' }}>
                             <Button type='submit' size='small' sx={{ textTransform: 'none', marginRight: '10px' }} variant='contained' color='info'>Kaydet</Button>
                             <Button size='small' sx={{ textTransform: 'none', backgroundColor: '#cfc597', }} variant='contained' color='inherit' onClick={clear}>Temizle</Button>
                         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { IconButton } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function Header() {
 
@@ -9,19 +9,19 @@ function Header() {
 
     return (
         <div className='header'>
-            <IconButton
-                onClick={() => navigate("/")}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-            >
-                <HomeIcon sx={{ fontSize: 40, color: 'white' }} />
-                <div className='title'>Şikayet Formu</div>
-            </IconButton>
+            <div className='header-cont'>
+                <div className='header1' onClick={() => navigate("/")}>
+                    <HomeIcon sx={{ fontSize: 40, color: 'white' }} />
+                    <div className='title'>Şikayet Formu</div>
+                </div>
+                <div>
+                    <Button onClick={() => navigate('/details')} color='success' sx={{ textTransform: 'none', marginRight: '30px' }}>Şikayetler</Button>
+                </div>
+            </div>
 
-        </div>
+
+
+        </div >
     )
 }
 

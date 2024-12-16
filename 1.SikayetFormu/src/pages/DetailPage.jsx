@@ -8,11 +8,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Container } from '@mui/material';
-import { IconButton } from '@mui/material'
+import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
-import EditIcon from '@mui/icons-material/Edit';
-import { useNavigate } from 'react-router-dom';
+
 
 function DetailPage() {
 
@@ -36,12 +34,16 @@ function DetailPage() {
         getAllComplaint();
     }, [])
 
+    const onRemoveComplaint = (complaintId) => {
+        dispatch(removeComplaint(complaintId))
+
+    }
 
     return (
         <div className='list-div'>
             <Container maxWidth="xl">
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead>
+                    <TableHead >
                         <TableRow>
                             <TableCell>id</TableCell>
                             <TableCell align="right">İsim</TableCell>
@@ -60,26 +62,8 @@ function DetailPage() {
                                 </TableCell>
                                 <TableCell align="right">{complaint.name}</TableCell>
                                 <TableCell align="right">{complaint.surname}</TableCell>
-                                <TableCell align="right">{complaint.complaint} <IconButton
-                                    size="small"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2, ml: 5 }}
-                                >
-                                    <RemoveIcon sx={{ fontSize: 14, color: 'black' }} />
-
-                                </IconButton>
-                                    <IconButton
-                                        size="small"
-                                        edge="start"
-                                        color="inherit"
-                                        aria-label="menu"
-                                        sx={{ mr: 2 }}
-                                    >
-                                        <EditIcon sx={{ fontSize: 14, color: 'black' }} />
-
-                                    </IconButton>
+                                <TableCell align="right">{complaint.complaint}
+                                    <Button onClick={() => onRemoveComplaint(complaint.id)}><RemoveIcon sx={{ fontSize: 14, color: 'black', marginLeft: '5px', cursor: 'pointer' }} /></Button>
                                 </TableCell>
                             </TableRow>
                         ))}
