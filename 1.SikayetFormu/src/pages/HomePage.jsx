@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import dbService from '../services/DbService';
 import { toast } from 'react-toastify';
 import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+
+
 
 function HomePage() {
 
@@ -22,6 +25,7 @@ function HomePage() {
                 id: String(Math.floor(Math.random() * 999999)),
                 name: values.name,
                 surname: values.surname,
+                ministry: values.ministry,
                 complaint: values.complaint
             }
             const response = await dbService.complaintPost(payload);
@@ -40,6 +44,7 @@ function HomePage() {
         initialValues: {
             name: '',
             surname: '',
+            ministry: '',
             complaint: '',
         },
         onSubmit: submit,
@@ -78,6 +83,22 @@ function HomePage() {
                             variant='outlined'
                             helperText={errors.surname && <span style={{ color: 'red' }} >{errors.surname}</span>}
                         />
+                        <FormControl sx={{ m: 1, minWidth: 222 }}>
+                            <InputLabel id="select-helper-label">Bakanlık</InputLabel>
+                            <Select
+                                labelId="select-helper-label"
+                                name='ministry'
+                                value={values.ministry}
+                                label="bakanlık"
+                                onChange={handleChange}
+                            >
+
+                                <MenuItem value={"Adalet Bakanlığı"}>Adalet Bakanlığı</MenuItem>
+                                <MenuItem value={"Sağlık Bakanlığı"}>Sağlık Bakanlığı</MenuItem>
+                                <MenuItem value={"Turizm Bakanlığı"}>Turizm Bakanlığı</MenuItem>
+                            </Select>
+                            <FormHelperText>{errors.ministry && <span style={{ color: 'red' }} >{errors.ministry}</span>}</FormHelperText>
+                        </FormControl>
                         <TextField
                             sx={{ marginBottom: '10px', height: '40px' }}
                             label="şikayet"

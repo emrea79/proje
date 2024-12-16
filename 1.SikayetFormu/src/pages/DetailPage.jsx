@@ -48,6 +48,7 @@ function DetailPage() {
                             <TableCell>id</TableCell>
                             <TableCell align="right">İsim</TableCell>
                             <TableCell align="right">Soyisim</TableCell>
+                            <TableCell align="right">Bakanlık</TableCell>
                             <TableCell align="right">Şikayet </TableCell>
                         </TableRow>
                     </TableHead>
@@ -62,6 +63,7 @@ function DetailPage() {
                                 </TableCell>
                                 <TableCell align="right">{complaint.name}</TableCell>
                                 <TableCell align="right">{complaint.surname}</TableCell>
+                                <TableCell align="right">{complaint.ministry}</TableCell>
                                 <TableCell align="right">{complaint.complaint}
                                     <Button onClick={() => onRemoveComplaint(complaint.id)}><RemoveIcon sx={{ fontSize: 14, color: 'black', marginLeft: '5px', cursor: 'pointer' }} /></Button>
                                 </TableCell>
