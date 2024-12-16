@@ -1,0 +1,50 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: #cfc597;
+}
+
+.title {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: white;
+    padding: 25px 10px;
+}
+
+.main {
+    background-image: url("./image/bg.jpg");
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+    height: 100vh;
+}
+
+.main-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.form-div {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-shadow: 1px 2px 3px lightgrey;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+
+.list-div {
+    margin-top: 20px;
+}
