@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import DbService from '../services/DbService';
-import { removeComplaint, setComplaints } from '../redux/slices/FormSlices';
+import { removeComplaint, removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
 import { toast } from 'react-toastify';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,7 +18,8 @@ function DetailPage() {
 
 
     const dispatch = useDispatch();
-    const { complaints } = useSelector((state) => state.form);
+    const { complaints, selectedComplaint } = useSelector((state) => state.form);
+    const { selectedMinistry, ministries } = useSelector((state) => state.form)
 
 
     const getAllComplaint = async () => {
@@ -32,14 +33,54 @@ function DetailPage() {
         }
     }
 
+    const getSelectedComplaint = async () => {
+        try {
+            const response = await DbService.complaintGet();
+            if (response) {
+                dispatch(setSelectedComplaint(response))
+            }
+        } catch (error) {
+            toast("Şikayetler Listelenemedi!!!")
+        }
+    }
+
     useEffect(() => {
         getAllComplaint();
+        getSelectedComplaint();
     }, [])
 
     const onRemoveComplaint = (complaintId) => {
-        dispatch(removeComplaint(complaintId))
+        dispatch(removeSelectedComplaint(complaintId))
 
     }
+
+    const selectData = () => {
+        let newList = [];
+        if (selectedMinistry === "Tüm Bakanlıklar") {
+            console.log(`${selectedMinistry}dasiniz`)
+            complaints && complaints.map((complaint) => {
+                newList = [...newList, complaint];
+            })
+            dispatch(setSelectedComplaint(newList));
+        }
+        else {
+            ministries && ministries.map((ministry) => {
+                if (selectedMinistry === ministry) {
+                    console.log(`${selectedMinistry}dasin`)
+                    complaints && complaints.map((complaint) => {
+                        if (complaint.ministry === ministry) {
+                            newList = [...newList, complaint];
+                        }
+                    })
+                    dispatch(setSelectedComplaint(newList));;
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        selectData();
+    }, [selectedMinistry])
 
     return (
         <div className='list-div'>
@@ -56,7 +97,7 @@ function DetailPage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {complaints && complaints.map((complaint, index) => (
+                        {selectedComplaint && selectedComplaint.map((complaint, index) => (
                             <TableRow
                                 key={index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

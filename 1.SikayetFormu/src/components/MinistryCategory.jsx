@@ -1,41 +1,46 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { Button, FormControl } from '@mui/material';
 import { useState } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { setSelectedMinistry } from '../redux/slices/FormSlices';
 
 function MinistryCategory() {
 
     const dispatch = useDispatch();
     const { ministries } = useSelector((state) => state.form);
-    const [ministriesValue, setMinistriesValue] = useState("");
+    const { selectedMinistry } = useSelector((state) => state.form,)
 
     const handleChange = (e) => {
-        setMinistriesValue(e.target.value);
+        dispatch(setSelectedMinistry(e.target.value));
     }
+
 
     return (
         <div>
-            <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">Ministries</FormLabel>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    value={ministriesValue}
+            <FormControl sx={{ m: 1, minWidth: 222 }}>
+                <InputLabel id="select-helper-label">Bakanlık</InputLabel>
+                <Select
+                    labelId="select-helper-label"
+                    name='ministry'
+                    value={selectedMinistry}
+                    label="bakanlık"
+                    defaultValue={"Tüm Bakanlıklar"}
                     onChange={handleChange}
+                    size='small'
+                    variant='standard'
+
                 >
+                    <MenuItem value={"Tüm Bakanlıklar"}>Tüm Bakanlıklar</MenuItem>
                     {
                         ministries && ministries.map((ministry, index) => (
-                            <FormControlLabel key={index} value={ministry} control={<Radio />} label={ministry} />
+                            <MenuItem key={index} value={ministry}>{ministry}</MenuItem>
                         ))
                     }
-
-
-                </RadioGroup>
+                </Select>
             </FormControl>
         </div>
     )

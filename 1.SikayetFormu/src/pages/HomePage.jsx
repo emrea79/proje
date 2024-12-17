@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,17 +10,18 @@ import dbService from '../services/DbService';
 import { toast } from 'react-toastify';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedMinistry } from '../redux/slices/FormSlices';
+
 
 
 
 function HomePage() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { ministries, selectedMinistry } = useSelector((state) => state.form);
 
-    const { ministries } = useSelector((state) => state.form);
-
-    // const [ministry, setMinistry] = useState("");
 
     const submit = async (values) => {
         try {
@@ -58,6 +59,10 @@ function HomePage() {
         resetForm();
     }
 
+    useEffect(() => {
+        dispatch(setSelectedMinistry("Tüm Bakanlıklar"));
+    })
+
 
     return (
         <div className='main'>
@@ -94,15 +99,13 @@ function HomePage() {
                                 value={values.ministry}
                                 label="bakanlık"
                                 onChange={handleChange}
+                                size='small'
                             >
                                 {
-                                    ministries && ministries.map((manistry, index) => (
-                                        <MenuItem key={index} value={manistry}>{manistry}</MenuItem>
+                                    ministries && ministries.map((ministry, index) => (
+                                        <MenuItem key={index} value={ministry}>{ministry}</MenuItem>
                                     ))
                                 }
-                                {/* <MenuItem value={"Adalet Bakanlığı"}>Adalet Bakanlığı</MenuItem>
-                                <MenuItem value={"Sağlık Bakanlığı"}>Sağlık Bakanlığı</MenuItem>
-                                <MenuItem value={"Turizm Bakanlığı"}>Turizm Bakanlığı</MenuItem> */}
                             </Select>
                             <FormHelperText>{errors.ministry && <span style={{ color: 'red' }} >{errors.ministry}</span>}</FormHelperText>
                         </FormControl>
