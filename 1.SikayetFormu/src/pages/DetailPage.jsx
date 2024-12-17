@@ -57,7 +57,6 @@ function DetailPage() {
     const selectData = () => {
         let newList = [];
         if (selectedMinistry === "Tüm Bakanlıklar") {
-            console.log(`${selectedMinistry}dasiniz`)
             complaints && complaints.map((complaint) => {
                 newList = [...newList, complaint];
             })
@@ -66,7 +65,6 @@ function DetailPage() {
         else {
             ministries && ministries.map((ministry) => {
                 if (selectedMinistry === ministry) {
-                    console.log(`${selectedMinistry}dasin`)
                     complaints && complaints.map((complaint) => {
                         if (complaint.ministry === ministry) {
                             newList = [...newList, complaint];

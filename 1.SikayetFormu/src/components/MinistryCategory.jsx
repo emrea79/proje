@@ -1,9 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, FormControl } from '@mui/material';
-import { useState } from 'react';
+import { FormControl } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { setSelectedMinistry } from '../redux/slices/FormSlices';
@@ -17,7 +15,6 @@ function MinistryCategory() {
     const handleChange = (e) => {
         dispatch(setSelectedMinistry(e.target.value));
     }
-
 
     return (
         <div>
