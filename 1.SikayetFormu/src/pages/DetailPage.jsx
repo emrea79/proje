@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import DbService from '../services/DbService';
+import dbService from '../services/DbService';
 import { removeComplaint, removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
 import { toast } from 'react-toastify';
 import Table from '@mui/material/Table';
@@ -24,7 +24,7 @@ function DetailPage() {
 
     const getAllComplaint = async () => {
         try {
-            const response = await DbService.complaintGet();
+            const response = await dbService.complaintGet();
             if (response) {
                 dispatch(setComplaints(response))
             }
@@ -35,7 +35,7 @@ function DetailPage() {
 
     const getSelectedComplaint = async () => {
         try {
-            const response = await DbService.complaintGet();
+            const response = await dbService.complaintGet();
             if (response) {
                 dispatch(setSelectedComplaint(response))
             }
@@ -49,8 +49,13 @@ function DetailPage() {
         getSelectedComplaint();
     }, [])
 
-    const onRemoveComplaint = (complaintId) => {
+    const onRemoveComplaint = async (complaintId) => {
         dispatch(removeSelectedComplaint(complaintId))
+        try {
+            await dbService.complaintRemove(complaintId);
+        } catch (error) {
+            toast("Şikayet silinirken bir hata oluştu")
+        }
 
     }
 

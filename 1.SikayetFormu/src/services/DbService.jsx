@@ -18,6 +18,14 @@ class dbService {
         })
     }
 
+    complaintRemove(deleteComplaint) {
+        return new Promise((resolve, reject) => {
+            axios.delete(`/complaints/${deleteComplaint}`)
+                .then((response) => resolve(`${deleteComplaint} idli şikayet silindi.`))
+                .catch((err) => reject(err))
+        })
+    };
+
     userPost(newUser) {
         return new Promise((resolve, reject) => {
             axiosUser.post("/user", newUser)

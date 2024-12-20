@@ -22,13 +22,6 @@
       "complaint": "pahalı"
     },
     {
-      "id": "761831",
-      "name": "veysel",
-      "surname": "asar",
-      "ministry": "Sağlık Bakanlığı",
-      "complaint": "Ambulans çağırdım gelmedi çok zor durumlarda kaldım yetkililere defalarca yazmama rağmen dönüş alamadım sizde geri dönüş sağlamazsanız eylem yapacağım."
-    },
-    {
       "id": "801233",
       "name": "mehmet ",
       "surname": "nas",
@@ -97,6 +90,13 @@
       "surname": "asfasfasf",
       "ministry": "Turizm Bakanlığı",
       "complaint": "asfasfasfasf"
+    },
+    {
+      "id": "623576",
+      "name": "myclient",
+      "surname": "erere",
+      "ministry": "Sağlık Bakanlığı",
+      "complaint": "assafafsafs"
     }
   ]
 }
