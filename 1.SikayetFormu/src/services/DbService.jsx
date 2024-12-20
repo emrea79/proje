@@ -1,5 +1,4 @@
 import axios from "../config/AxiosConfig";
-import axiosUser from "../config/AxiosUserConfig";
 
 class dbService {
     complaintPost(newComplaint) {
@@ -25,26 +24,6 @@ class dbService {
                 .catch((err) => reject(err))
         })
     };
-
-    userPost(newUser) {
-        return new Promise((resolve, reject) => {
-            axiosUser.post("/user", newUser)
-                .then((response) => resolve(response.data))
-                .catch((error) => reject(error))
-        });
-    }
-
-    userGet() {
-        return new Promise((resolve, reject) => {
-            axiosUser.get("/user")
-                .then((response) => resolve(response.data))
-                .catch((error) => reject(error))
-        })
-    }
-
 }
-
-
-
 
 export default new dbService();

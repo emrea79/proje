@@ -12,17 +12,16 @@ import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedMinistry } from '../redux/slices/FormSlices';
-import { setCurrentUser, updateCurrentUser } from '../redux/slices/UserSlices';
+
 
 
 
 
 function HomePage() {
 
-    const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { ministries, selectedMinistry } = useSelector((state) => state.form);
+    const { ministries } = useSelector((state) => state.form);
 
 
     const submit = async (values) => {
@@ -36,11 +35,6 @@ function HomePage() {
             }
             const response = await dbService.complaintPost(payload);
             if (response) {
-                const userLoad = {
-                    ...currentUser,
-                    complaintHistory: payload
-                }
-                dispatch(updateCurrentUser(userLoad));
                 clear();
                 toast("Şikayet kaydedildi");
                 navigate("/details");

@@ -3,10 +3,8 @@ import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
 import Header from './components/Header';
-import DetailPage from './pages/DetailPage';
 import { useEffect } from 'react';
 import RouterConfig from './config/RouterConfig'
-import { setCurrentUser } from './redux/slices/UserSlices';
 import { useDispatch } from 'react-redux';
 import Keycloak from 'keycloak-js';
 
@@ -24,11 +22,6 @@ function App() {
     } catch (error) {
     }
   }
-
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"))
-    dispatch(setCurrentUser(currentUser));
-  })
 
   useEffect(() => {
     getAllComplaint();

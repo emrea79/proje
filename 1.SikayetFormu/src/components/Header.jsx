@@ -17,7 +17,6 @@ function Header() {
                     <div className='title'>Şikayet Formu</div>
                 </div>
                 <div>
-                    <Button color='success' onClick={() => navigate("/register")} ><AccountBoxIcon /></Button>
                     <Button onClick={() => navigate('/details')} startIcon={<ViewListOutlinedIcon />} color='success' sx={{ textTransform: 'none', marginRight: '30px' }}>Şikayetler</Button>
                 </div>
             </div>
