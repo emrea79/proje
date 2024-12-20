@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import RouterConfig from './config/RouterConfig'
 import { setCurrentUser } from './redux/slices/UserSlices';
 import { useDispatch } from 'react-redux';
+import Keycloak from 'keycloak-js';
 
 function App() {
 
@@ -32,6 +33,30 @@ function App() {
   useEffect(() => {
     getAllComplaint();
   }, [])
+
+  const client = new Keycloak({
+    url: "http://127.0.0.1:4000/",
+    realm: "myrealm",
+    clientId: "myclient",
+  });
+
+  const isRun = useRef(false);
+  const [isLogin, setLogin] = useState(false);
+
+  if (isRun.current) return;
+
+  isRun.current = true;
+
+  client.init({ onLoad: "login-required" })
+    .then((res) => {
+      setLogin(true)
+
+    })
+    .catch((err) => {
+      console.log("hata", err)
+    })
+
+
 
   return (
     <div>
