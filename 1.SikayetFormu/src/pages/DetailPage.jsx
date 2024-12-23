@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import dbService from '../services/DbService';
-import { removeComplaint, removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
+import { removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
 import { toast } from 'react-toastify';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MinistryCategory from '../components/MinistryCategory';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -18,9 +19,9 @@ function DetailPage() {
 
 
     const dispatch = useDispatch();
-    const { complaints, selectedComplaint } = useSelector((state) => state.form);
-    const { selectedMinistry, ministries } = useSelector((state) => state.form)
+    const { complaints, selectedComplaint, selectedMinistry, ministries, editable } = useSelector((state) => state.form);
 
+    const [newComplaint, setNewCompliant] = useState(complaints);
 
     const getAllComplaint = async () => {
         try {
@@ -89,35 +90,41 @@ function DetailPage() {
         <div className='list-div'>
             <Container maxWidth="xl">
                 <MinistryCategory />
-                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead >
-                        <TableRow>
-                            <TableCell>id</TableCell>
-                            <TableCell align="right">İsim</TableCell>
-                            <TableCell align="right">Soyisim</TableCell>
-                            <TableCell align="right">Bakanlık</TableCell>
-                            <TableCell align="right">Şikayet </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {selectedComplaint && selectedComplaint.map((complaint, index) => (
-                            <TableRow
-                                key={index}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {complaint.id}
-                                </TableCell>
-                                <TableCell align="right">{complaint.name}</TableCell>
-                                <TableCell align="right">{complaint.surname}</TableCell>
-                                <TableCell align="right">{complaint.ministry}</TableCell>
-                                <TableCell align="right">{complaint.complaint}
-                                    <Button onClick={() => onRemoveComplaint(complaint.id)}><RemoveIcon sx={{ fontSize: 14, color: 'black', marginLeft: '5px', cursor: 'pointer' }} /></Button>
-                                </TableCell>
+                <div className='main-table'>
+                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" >
+                        <TableHead >
+                            <TableRow sx={{ bgcolor: '#cfc597' }} >
+                                <TableCell sx={{ color: 'white' }}>id</TableCell>
+                                <TableCell sx={{ color: 'white' }} align="right">İsim</TableCell>
+                                <TableCell sx={{ color: 'white' }} align="right">Soyisim</TableCell>
+                                <TableCell sx={{ color: 'white' }} align="right">Bakanlık</TableCell>
+                                <TableCell sx={{ color: 'white' }} align="right">Şikayet </TableCell>
+                                <TableCell sx={{ color: 'white' }} align="right">İşlemler </TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody  >
+                            {selectedComplaint && selectedComplaint.map((complaint, index) => (
+                                <TableRow
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {complaint.id}
+                                    </TableCell>
+                                    <TableCell align="right">{complaint.name}</TableCell>
+                                    <TableCell align="right">{complaint.surname}</TableCell>
+                                    <TableCell align="right">{complaint.ministry}</TableCell>
+                                    <TableCell align="right">{complaint.complaint}</TableCell>
+                                    <TableCell align='right'>
+                                        <Button onClick={() => onRemoveComplaint(complaint.id)}><RemoveIcon sx={{ fontSize: 14, color: 'black', cursor: 'pointer' }} /></Button>
+                                        <Button><EditIcon sx={{ fontSize: 14, color: 'black', cursor: 'pointer' }} /></Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
 
             </Container>
 

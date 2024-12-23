@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import RouterConfig from './config/RouterConfig'
 import { useDispatch } from 'react-redux';
 import Keycloak from 'keycloak-js';
+import dbService from './services/DbService';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
 
   const getAllComplaint = async () => {
     try {
-      const response = await DbService.complaintGet();
+      const response = await dbService.complaintGet();
       if (response) {
         dispatch(setComplaints(response))
         console.log(response)
@@ -28,7 +29,7 @@ function App() {
   }, [])
 
   const client = new Keycloak({
-    url: "http://127.0.0.1:4000/",
+    url: "http://localhost:4000/",
     realm: "myrealm",
     clientId: "myclient",
   });
@@ -36,18 +37,20 @@ function App() {
   const isRun = useRef(false);
   const [isLogin, setLogin] = useState(false);
 
-  if (isRun.current) return;
+  useEffect(() => {
+    if (isRun.current) return;
 
-  isRun.current = true;
+    isRun.current = true;
 
-  client.init({ onLoad: "login-required" })
-    .then((res) => {
-      setLogin(true)
+    client.init({ onLoad: "login-required" })
+      .then((res) => {
+        setLogin(res)
 
-    })
-    .catch((err) => {
-      console.log("hata", err)
-    })
+      })
+      .catch((err) => {
+        console.log("hata", err)
+      })
+  })
 
 
 

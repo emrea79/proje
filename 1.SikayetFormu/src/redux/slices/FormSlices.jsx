@@ -8,6 +8,7 @@ const initialState = {
     ],
     selectedMinistry: "Tüm Bakanlıklar",
     selectedComplaint: [],
+    editable: false,
 }
 
 export const FormSlice = createSlice({
@@ -20,6 +21,11 @@ export const FormSlice = createSlice({
         removeComplaint: (state, action) => {
             state.complaints = [...state.complaints.filter((complaint) => complaint.id !== action.payload)];
         },
+        updateComplaint: (state, action) => {
+            const payload = {
+
+            }
+        },
         setSelectedMinistry: (state, action) => {
             state.selectedMinistry = action.payload;
         },
@@ -28,9 +34,12 @@ export const FormSlice = createSlice({
         },
         removeSelectedComplaint: (state, action) => {
             state.selectedComplaint = [...state.selectedComplaint.filter((complaint) => complaint.id !== action.payload)];
+        },
+        setEditable: (state, action) => {
+            state.editable = action.payload;
         }
     },
 })
 
-export const { setComplaints, removeComplaint, setSelectedMinistry, setSelectedComplaint, removeSelectedComplaint } = FormSlice.actions
+export const { setComplaints, removeComplaint, setSelectedMinistry, setSelectedComplaint, removeSelectedComplaint, setEditable } = FormSlice.actions
 export default FormSlice.reducer
