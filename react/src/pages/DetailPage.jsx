@@ -21,8 +21,8 @@ function DetailPage({ token }) {
     const isRun = useRef(false);
     const dispatch = useDispatch();
     const { complaints, selectedComplaint, selectedMinistry, ministries, editable } = useSelector((state) => state.form);
-
-    const [newComplaint, setNewCompliant] = useState(complaints);
+    const [data, setData] = useState(null)
+    // const [newComplaint, setNewCompliant] = useState(complaints);
 
 
     const getAllComplaint = async () => {
@@ -50,7 +50,8 @@ function DetailPage({ token }) {
         axiosBackendInstance
             .get("/documents", config)
             .then((res) => console.log(res.data))
-            .catch((error) => console.error(error));
+            .catch((error) => console.error("Hatamız:" + error));
+
     }, [])
 
     const getSelectedComplaint = async () => {

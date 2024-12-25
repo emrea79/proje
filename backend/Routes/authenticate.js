@@ -1,17 +1,17 @@
-// import jwtmod from "jsonwebtoken"
+import jwtmod from "jsonwebtoken"
 
-// export default async (req, res, next) => {
-//     const bearerHeader = req.header["authorization"];
-//     const token = bearerHeader && bearerHeader.split(" ")[1];
-//     if (token === null) return res.sendStatus(401);
+export default async (req, res, next) => {
+    const bearerHeader = req.header["authorization"];
+    const token = bearerHeader && bearerHeader.split(" ")[1];
+    if (token === null) return res.sendStatus(401);
+    console.log(token)
+    const public_key = `------BEGIN PUBLIC KEY ------\n${process.env.PUBLICKEY}\n------END PUBLIC KEY------`
 
-//     const public_key = `------BEGIN PUBLIC KEY ------\n${process.env.PUBLICKEY}\n------END PUBLIC KEY------`
+    const decodedToken = jwtmod.verify(token, public_key, {
+        algorithms: ["RS256"],
+    });
+    const { email } = decodedToken;
+    req.user = email;
+    next();
 
-//     const decodedToken = jwtmod.verify(token, public_key, {
-//         algorithms: ["RS256"],
-//     });
-//     const { email } = decodedToken;
-//     req.user = email;
-//     next();
-
-// };
+};
