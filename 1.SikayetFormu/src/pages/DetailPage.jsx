@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import dbService from '../services/DbService';
 import { removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
@@ -12,16 +12,18 @@ import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MinistryCategory from '../components/MinistryCategory';
 import EditIcon from '@mui/icons-material/Edit';
+import axiosBackendInstance from '../config/AxiosBackendConfig';
 
 
 
 function DetailPage() {
 
-
+    const isRun = useRef(false);
     const dispatch = useDispatch();
     const { complaints, selectedComplaint, selectedMinistry, ministries, editable } = useSelector((state) => state.form);
 
     const [newComplaint, setNewCompliant] = useState(complaints);
+
 
     const getAllComplaint = async () => {
         try {
@@ -33,6 +35,16 @@ function DetailPage() {
             toast("Şikayetler Listelenemedi!!!")
         }
     }
+
+    useEffect(() => {
+        if (isRun.current) return;
+
+        isRun.current = true;
+        axiosBackendInstance
+            .get("/documents")
+            .then((res) => console.log(res.data))
+            .catch((error) => console.error(error));
+    }, [])
 
     const getSelectedComplaint = async () => {
         try {

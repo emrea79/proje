@@ -34,8 +34,15 @@ function App() {
     clientId: "myclient",
   });
 
+  // const client = new Keycloak({
+  //   url: "http://localhost:4000/",
+  //   realm: "myrealm",
+  //   clientId: "confidential-client",
+  // });
+
   const isRun = useRef(false);
   const [isLogin, setLogin] = useState(false);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     if (isRun.current) return;
@@ -45,14 +52,15 @@ function App() {
     client.init({ onLoad: "login-required" })
       .then((res) => {
         setLogin(res)
+        setToken(client.token)
 
       })
       .catch((err) => {
         console.log("hata", err)
       })
   })
-
-
+  console.log("isLogin:" + isLogin);
+  console.log("token:" + token);
 
   return (
     <div>

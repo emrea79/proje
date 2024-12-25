@@ -13,10 +13,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedMinistry } from '../redux/slices/FormSlices';
 
-
-
-
-
 function HomePage() {
 
     const navigate = useNavigate();
