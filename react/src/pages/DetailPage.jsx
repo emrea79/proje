@@ -16,7 +16,7 @@ import axiosBackendInstance from '../config/AxiosBackendConfig';
 
 
 
-function DetailPage() {
+function DetailPage({ token }) {
 
     const isRun = useRef(false);
     const dispatch = useDispatch();
@@ -40,8 +40,15 @@ function DetailPage() {
         if (isRun.current) return;
 
         isRun.current = true;
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
         axiosBackendInstance
-            .get("/documents")
+            .get("/documents", config)
             .then((res) => console.log(res.data))
             .catch((error) => console.error(error));
     }, [])

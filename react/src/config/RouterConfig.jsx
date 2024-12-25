@@ -4,11 +4,11 @@ import HomePage from '../pages/HomePage'
 import DetailPage from '../pages/DetailPage'
 
 
-function RouterConfig() {
+function RouterConfig({ token }) {
     return (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/details' element={<DetailPage />} />
+            <Route path='/details' element={<DetailPage token={token} />} />
         </Routes>
     )
 }

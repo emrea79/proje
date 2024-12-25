@@ -59,13 +59,12 @@ function App() {
         console.log("hata", err)
       })
   })
-  console.log("isLogin:" + isLogin);
-  console.log("token:" + token);
 
+  // console.log(token)
   return (
     <div>
       <Header />
-      <RouterConfig />
+      <RouterConfig token={token} />
       <ToastContainer autoClose={2500} style={{ fontSize: '13px' }} />
     </div>
   )
