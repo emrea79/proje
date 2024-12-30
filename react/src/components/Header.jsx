@@ -6,7 +6,7 @@ import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useSelector } from 'react-redux';
 
-function Header({ token }) {
+function Header() {
 
     const navigate = useNavigate();
     const { currentToken } = useSelector((state) => state.form)

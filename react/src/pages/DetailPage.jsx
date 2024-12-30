@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 
-function DetailPage({ token }) {
+function DetailPage() {
 
     const isRun = useRef(false);
     const dispatch = useDispatch();
