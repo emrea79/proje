@@ -12,14 +12,17 @@ import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MinistryCategory from '../components/MinistryCategory';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-function DetailPage() {
+function DetailPage({ token }) {
 
     const isRun = useRef(false);
+    const navigate = useNavigate()
     const dispatch = useDispatch();
+    const { currentToken } = useSelector((state) => state.form)
     const { complaints, selectedComplaint, selectedMinistry, ministries, editable } = useSelector((state) => state.form);
 
     const [newComplaint, setNewCompliant] = useState(complaints);
@@ -36,6 +39,13 @@ function DetailPage() {
         }
     }
 
+    useEffect(() => {
+        if (currentToken === 'null') {
+            navigate("/");
+            alert("Login Yapılmadı");
+            return;
+        }
+    }, [currentToken])
 
     const getSelectedComplaint = async () => {
         try {
@@ -51,6 +61,7 @@ function DetailPage() {
     useEffect(() => {
         getAllComplaint();
         getSelectedComplaint();
+
     }, [])
 
     const onRemoveComplaint = async (complaintId) => {

@@ -22,6 +22,10 @@ function HomePage({ token }) {
 
 
     const submit = async (values) => {
+        if (currentToken === 'null') {
+            alert("login Yapılmadı");
+            return;
+        }
         try {
             const payload = {
                 id: String(Math.floor(Math.random() * 999999)),
