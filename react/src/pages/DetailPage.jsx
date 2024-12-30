@@ -3,16 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import dbService from '../services/DbService';
 import { removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
 import { toast } from 'react-toastify';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MinistryCategory from '../components/MinistryCategory';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import ComplaintTable from '../components/ComplaintTable';
 
 
 
@@ -64,15 +60,15 @@ function DetailPage({ token }) {
 
     }, [])
 
-    const onRemoveComplaint = async (complaintId) => {
-        dispatch(removeSelectedComplaint(complaintId))
-        try {
-            await dbService.complaintRemove(complaintId);
-        } catch (error) {
-            toast("Şikayet silinirken bir hata oluştu")
-        }
+    // const onRemoveComplaint = async (complaintId) => {
+    //     dispatch(removeSelectedComplaint(complaintId))
+    //     try {
+    //         await dbService.complaintRemove(complaintId);
+    //     } catch (error) {
+    //         toast("Şikayet silinirken bir hata oluştu")
+    //     }
 
-    }
+    // }
 
     const selectData = () => {
         let newList = [];
@@ -104,41 +100,7 @@ function DetailPage({ token }) {
         <div className='list-div'>
             <Container maxWidth="xl">
                 <MinistryCategory />
-                <div className='main-table'>
-                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" >
-                        <TableHead >
-                            <TableRow sx={{ bgcolor: '#cfc597' }} >
-                                <TableCell sx={{ color: 'white' }}>id</TableCell>
-                                <TableCell sx={{ color: 'white' }} align="right">İsim</TableCell>
-                                <TableCell sx={{ color: 'white' }} align="right">Soyisim</TableCell>
-                                <TableCell sx={{ color: 'white' }} align="right">Bakanlık</TableCell>
-                                <TableCell sx={{ color: 'white' }} align="right">Şikayet </TableCell>
-                                <TableCell sx={{ color: 'white' }} align="right">İşlemler </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody  >
-                            {selectedComplaint && selectedComplaint.map((complaint, index) => (
-                                <TableRow
-                                    key={index}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {complaint.id}
-                                    </TableCell>
-                                    <TableCell align="right">{complaint.name}</TableCell>
-                                    <TableCell align="right">{complaint.surname}</TableCell>
-                                    <TableCell align="right">{complaint.ministry}</TableCell>
-                                    <TableCell align="right">{complaint.complaint}</TableCell>
-                                    <TableCell align='right'>
-                                        <Button onClick={() => onRemoveComplaint(complaint.id)}><RemoveIcon sx={{ fontSize: 14, color: 'black', cursor: 'pointer' }} /></Button>
-                                        <Button><EditIcon sx={{ fontSize: 14, color: 'black', cursor: 'pointer' }} /></Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
+                <ComplaintTable />
 
             </Container>
 
