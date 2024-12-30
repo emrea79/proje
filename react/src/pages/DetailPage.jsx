@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import dbService from '../services/DbService';
-import { removeSelectedComplaint, setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
+import { setComplaints, setSelectedComplaint } from '../redux/slices/FormSlices';
 import { toast } from 'react-toastify';
-import { Button, Container } from '@mui/material';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Container } from '@mui/material';
 import MinistryCategory from '../components/MinistryCategory';
-import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import ComplaintTable from '../components/ComplaintTable';
-
-
 
 
 function DetailPage({ token }) {
@@ -19,10 +15,7 @@ function DetailPage({ token }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const { currentToken } = useSelector((state) => state.form)
-    const { complaints, selectedComplaint, selectedMinistry, ministries, editable } = useSelector((state) => state.form);
-
-    const [newComplaint, setNewCompliant] = useState(complaints);
-
+    const { complaints, selectedMinistry, ministries } = useSelector((state) => state.form);
 
     const getAllComplaint = async () => {
         try {
@@ -60,16 +53,6 @@ function DetailPage({ token }) {
 
     }, [])
 
-    // const onRemoveComplaint = async (complaintId) => {
-    //     dispatch(removeSelectedComplaint(complaintId))
-    //     try {
-    //         await dbService.complaintRemove(complaintId);
-    //     } catch (error) {
-    //         toast("Şikayet silinirken bir hata oluştu")
-    //     }
-
-    // }
-
     const selectData = () => {
         let newList = [];
         if (selectedMinistry === "Tüm Bakanlıklar") {
@@ -101,7 +84,6 @@ function DetailPage({ token }) {
             <Container maxWidth="xl">
                 <MinistryCategory />
                 <ComplaintTable />
-
             </Container>
 
         </div>

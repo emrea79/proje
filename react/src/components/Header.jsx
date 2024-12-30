@@ -3,7 +3,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useSelector } from 'react-redux';
 
 function Header() {
@@ -16,7 +15,6 @@ function Header() {
             alert("Login Yapılmadı")
             return;
         }
-        console.log("currentToken:", currentToken)
         navigate('/details')
     }
 
