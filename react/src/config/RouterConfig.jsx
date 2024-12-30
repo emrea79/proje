@@ -7,7 +7,7 @@ import DetailPage from '../pages/DetailPage'
 function RouterConfig({ token }) {
     return (
         <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<HomePage token={token} />} />
             <Route path='/details' element={<DetailPage token={token} />} />
         </Routes>
     )

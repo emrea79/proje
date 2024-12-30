@@ -12,7 +12,7 @@ import { Button, Container } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MinistryCategory from '../components/MinistryCategory';
 import EditIcon from '@mui/icons-material/Edit';
-import axiosBackendInstance from '../config/AxiosBackendConfig';
+
 
 
 
@@ -36,22 +36,6 @@ function DetailPage({ token }) {
         }
     }
 
-    useEffect(() => {
-        if (isRun.current) return;
-
-        isRun.current = true;
-
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-
-        axiosBackendInstance
-            .get("/documents", config)
-            .then((res) => console.log(res.data))
-            .catch((error) => console.error(error));
-    }, [])
 
     const getSelectedComplaint = async () => {
         try {

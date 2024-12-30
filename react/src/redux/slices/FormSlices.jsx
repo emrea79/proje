@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
     complaints: [],
@@ -9,6 +9,7 @@ const initialState = {
     selectedMinistry: "Tüm Bakanlıklar",
     selectedComplaint: [],
     editable: false,
+    currentToken: null,
 }
 
 export const FormSlice = createSlice({
@@ -37,9 +38,12 @@ export const FormSlice = createSlice({
         },
         setEditable: (state, action) => {
             state.editable = action.payload;
+        },
+        setCurrentToken: (state, action) => {
+            state.currentToken = action.payload;
         }
     },
 })
 
-export const { setComplaints, removeComplaint, setSelectedMinistry, setSelectedComplaint, removeSelectedComplaint, setEditable } = FormSlice.actions
+export const { setComplaints, removeComplaint, setSelectedMinistry, setSelectedComplaint, removeSelectedComplaint, setEditable, setCurrentToken } = FormSlice.actions
 export default FormSlice.reducer

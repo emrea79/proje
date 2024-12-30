@@ -63,7 +63,7 @@ function App() {
   // console.log(token)
   return (
     <div>
-      <Header />
+      <Header token={token} />
       <RouterConfig token={token} />
       <ToastContainer autoClose={2500} style={{ fontSize: '13px' }} />
     </div>

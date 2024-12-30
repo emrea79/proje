@@ -11,13 +11,14 @@ import { toast } from 'react-toastify';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedMinistry } from '../redux/slices/FormSlices';
+import { setCurrentToken, setSelectedMinistry } from '../redux/slices/FormSlices';
 
-function HomePage() {
+function HomePage({ token }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { ministries } = useSelector((state) => state.form);
+    const { ministries, currentToken } = useSelector((state) => state.form);
+
 
 
     const submit = async (values) => {
@@ -59,6 +60,11 @@ function HomePage() {
     useEffect(() => {
         dispatch(setSelectedMinistry("Tüm Bakanlıklar"));
     })
+
+    useEffect(() => {
+        sessionStorage.setItem("token", token);
+        dispatch(setCurrentToken(sessionStorage.getItem("token")))
+    }, [token])
 
 
     return (
